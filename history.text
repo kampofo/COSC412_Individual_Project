@@ -1,0 +1,3 @@
+- commit 1 11/9/2020:
+    user authentication and routing is working. users can also send data to firestore database through form page.
+    consider adding new resume form to userpage instead of its own form page

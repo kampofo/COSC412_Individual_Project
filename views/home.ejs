@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('partials/bootstrapCSS') -%>
+
+		<link rel="stylesheet" href="style.css" />
+		<title>Resume Builder</title>
+	</head>
+	<body>
+		<!-- navbar -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">Resume Builder</a>
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarNav"
+				aria-controls="navbarNav"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item active">
+						<a class="nav-link" href="/"
+							>Home <span class="sr-only">(current)</span></a
+						>
+					</li>
+					<li class="nav-item" onclick="signInWithGoogle()">
+						<a class="nav-link" href="#">Login</a>
+					</li>
+					<li class="nav-item" onclick="signOutWithGoogle()">
+						<a class="nav-link" href="/">Logout</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<h1>Welcome!</h1>
+
+		<!-- reference to firebase cdn app information -->
+		<%- include('partials/firebaseHeader') -%>
+		<script src="js/firebaseAuth.js"></script>
+		<%- include('partials/bootstrapJS') -%>
+	</body>
+</html>

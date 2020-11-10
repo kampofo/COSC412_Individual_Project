@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<%- include('partials/bootstrapCSS') -%>
+
+		<link rel="stylesheet" href="style.css" />
+		<title>Form</title>
+	</head>
+	<body>
+		<h1>Resume Builder Form</h1>
+		<form action="" method="post">
+			<div>
+				<p>What is this resume for?</p>
+				<label for="title">Title</label>
+				<input type="text" name="title" id="title" />
+			</div>
+			<div class="form-group">
+				<h3>Contact Information</h3>
+				<p>This section should contain your basic information.</p>
+
+				<div>
+					<label for="full-name">Full Name</label>
+					<input type="text" name="full-name" id="full-name" />
+				</div>
+
+				<div>
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email" />
+				</div>
+
+				<div>
+					<label for="social-link">Social Media Link</label>
+					<input type="url" name="url" id="url" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<h3>Education</h3>
+				<p>This section contains information about your schooling</p>
+
+				<div></div>
+				<label for="school-name">School Name</label>
+				<input type="text" name="school-name" id="school-name" />
+
+				<div>
+					<label for="school-location">Location</label>
+					<input
+						type="text"
+						name="school-location"
+						id="school-location"
+					/>
+				</div>
+
+				<div>
+					<label for="degree-type">Degree Type</label>
+					<select name="degree-type" id="degree-type">
+						<option value="A.A.">Associate of Arts</option>
+						<option value="A.S.">Associate of Science</option>
+						<option value="B.A.">Bachelor of Arts</option>
+						<option value="B.S.">Bachelor of Science</option>
+						<option value="M.A.">Master of Arts</option>
+						<option value="M.S.">Master of Science</option>
+					</select>
+				</div>
+
+				<div>
+					<label for="degree-name">Degree Name</label>
+					<input type="text" name="degree-name" id="degree-name" />
+				</div>
+
+				<div>
+					<label for="graduation-date">Graduation Date</label>
+					<input
+						type="month"
+						name="graduation-date"
+						id="graduation-date"
+					/>
+				</div>
+
+				<div>
+					<label for="relevant-courses">Relevant Courses</label>
+					<input
+						type="text"
+						name="relevant-courses"
+						id="relevant-courses"
+					/>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<h3>Skills</h3>
+
+				<div>
+					<label>Languages and Technologies</label>
+					<input type="text" name="languages-technologies" id="" />
+				</div>
+
+				<button>Add Item+</button>
+			</div>
+
+			<div class="form-group">
+				<h3>Experience</h3>
+
+				<div>
+					<label for="company">Company or Organization</label>
+					<input type="text" name="company" id="" />
+				</div>
+
+				<div>
+					<label for="company-location">Location</label>
+					<input type="text" name="company-location" id="" />
+				</div>
+
+				<div>
+					<label for="job-title">Job Title</label>
+					<input type="text" name="job-title" id="" />
+				</div>
+
+				<div>
+					<label for="start-date">Start Date</label>
+					<input type="month" name="start-date" id="" />
+				</div>
+
+				<div>
+					<label for="end-date">End Date</label>
+					<input type="month" name="end-date" id="" />
+				</div>
+
+				<div>
+					<label for="job-responsibilities"
+						>Job Responsibilites</label
+					>
+					<input type="text" name="job-responsibilities" id="" />
+					<div><button>Add Responsibilites</button></div>
+					<div><button>Add Addtional Experience</button></div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<h3>Selected Projects</h3>
+
+				<div>
+					<label for="project-title">Project Title</label>
+					<input type="text" name="project-title" id="" />
+				</div>
+				<div>
+					<label for="project-description">Project Description</label>
+					<input type="text" name="project-description" id="" />
+				</div>
+				<div>
+					<label for="project-responsibilties"
+						>Project Responsibilities</label
+					>
+					<input type="text" name="project-responsibilties" id="" />
+				</div>
+				<div><button>Add Responsibility</button></div>
+				<div><button>Add Project</button></div>
+			</div>
+
+			<div class="form-group">
+				<h3>Awards and Accomplishments</h3>
+				<div>
+					<label for="award-issuer">Award Issuer</label>
+					<input type="text" name="award-issuer" id="" />
+				</div>
+				<div>
+					<label for="award-title">Award Title</label>
+					<input type="text" name="award-title" id="" />
+				</div>
+				<div>
+					<label for="award-date"></label>
+					<input type="month" name="award-date" id="" />
+				</div>
+				<div>
+					<label for="award-description">Award Description</label>
+					<input type="text" name="award-description" id="" />
+				</div>
+			</div>
+
+			<button type="submit">Submit</button>
+		</form>
+		<%- include('partials/firebaseHeader') -%>
+		<script src="js/firebaseAuth.js"></script>
+		<%- include('partials/bootstrapJS') -%>
+	</body>
+</html>
