@@ -1,0 +1,12 @@
+System Test Procedure
+This document will discuss the total test needed to verify proper functionality of my entire resume builder application. This document is subject to grow or change to reflect the current state of the project. The process is as follows.
+
+Upon reaching the home page. Verify that the proper navbar options are displayed and click login.
+Attempt successful google sign in. When successfully authorized the user will be routed to the user dashboard page. the user is greeted with an updated navigation bar to reflect current user authentication status.
+Then click the create resume button. This will route users to the form document which will only be made available to users who have successfully authenticated. Form data will be generated to populate the form.
+The form will be submitted. Upon submission of the form user will be routed back to the user dashboard and will be greeted with a real time list of all resume form submissions the user has generated. The links will be clickable. 
+Clicking the link of the newly generated resume will send that resumes data to the api which will style and download the selected resume.
+Users will then click back to the home page as an authenticated user, and be met with an updated navigation bar that allows for routing back to the user dashboard location which was previously unavailable to unauthorized users.
+User will then return back to the user dashboard route and select the log out option. This logout option signs out the user, and will then route them back to home page.
+
+This is the current system test procedure being used to verify full application feature functionality and should accurately reflect the intended use of an end user utilizing this application.

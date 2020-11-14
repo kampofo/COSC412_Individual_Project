@@ -9,8 +9,13 @@
 		<title>Form</title>
 	</head>
 	<body>
-		<h1>Resume Builder Form</h1>
-		<form action="" method="post">
+		<!-- navbar -->
+		<%- include('partials/navbar') -%>
+
+		<div id="form-warning" style="display: none"></div>
+		<form id="create-form" action="" method="" style="display: none">
+			<h1>Resume Builder Form</h1>
+
 			<div>
 				<p>What is this resume for?</p>
 				<label for="title">Title</label>
@@ -182,6 +187,7 @@
 			<button type="submit">Submit</button>
 		</form>
 		<%- include('partials/firebaseHeader') -%>
+		<script src="js/index.js"></script>
 		<script src="js/firebaseAuth.js"></script>
 		<%- include('partials/bootstrapJS') -%>
 	</body>
