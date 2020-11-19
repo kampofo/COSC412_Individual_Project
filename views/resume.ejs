@@ -6,29 +6,17 @@
 		<%- include('partials/bootstrapCSS') -%>
 
 		<link rel="stylesheet" href="style.css" />
-		<title>Resume Builder</title>
+		<title>Resume</title>
 	</head>
 	<body>
 		<!-- navbar -->
 		<%- include('partials/navbar') -%>
 
-		<div id="user-content">
-			<!-- create new resume button -->
-			<a href="/form"
-				><button type="button" class="btn btn-primary btn-lg">
-					Create New Resume
-				</button></a
-			>
-			<h3>Previous Resumes</h3>
-			<ul id="resume-list"></ul>
-		</div>
+		<h1>Resume Page</h1>
 
-		<div id="resume-content"></div>
-
-		<!-- reference to firebase cdn app information -->
 		<%- include('partials/firebaseHeader') -%>
-		<script src="js/generateResume.js"></script>
 		<script src="js/index.js"></script>
+		<script src="js/generateResume.js"></script>
 		<script src="js/firebaseAuth.js"></script>
 		<%- include('partials/bootstrapJS') -%>
 	</body>

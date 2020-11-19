@@ -2,30 +2,53 @@
 
 var userContent = document.querySelector("#user-content");
 
+var userID;
+
+var resumes = [];
+
+// create on click
 // listen for auth status changes
 firebase.auth().onAuthStateChanged(function (user) {
 	if (user) {
-		console.log("user logged in", user);
+		userID = user.uid;
 		// show user page content
-
 		// get list of data of all documents in the resume collection in real time
 		db.collection("resumes").onSnapshot((querySnapshot) => {
-			const tempDoc = [];
+			var tempDoc = [];
 
 			querySnapshot.docs.forEach((doc) => {
-				tempDoc.push({ id: doc.id, ...doc.data() });
+				// db.collection("resumes").doc(doc.id).update({
+				// 	id: doc.id,
+				// });
+
+				//render resumes with certain user id
+				if (doc.data()["user-id"] == userID) {
+					tempDoc.push({ id: doc.id, ...doc.data() });
+				}
 			});
+
 			if (window.location.pathname == "/user") {
 				userContent.style.display = "block";
 
-				setUpResumeList(tempDoc);
+				setUpResumeList(user, tempDoc);
+				resumes = document.querySelectorAll(".resume-title");
+				for (var i = 0; i < resumes.length; i++) {
+					resumes[i].addEventListener("click", (e) => {
+						console.log(tempDoc[0]);
+					});
+				}
 			}
 
 			if (window.location.pathname == "/form") {
 				setUpFormPage(user);
 			}
+
+			// if (window.location.pathname == "/resume") {
+			// 	console.log(resumes);
+			// }
 			setupUI(user);
 		});
+
 		// db.collection("resumes")
 		// 	.get()
 		// 	.then((querySnapshot) => {
@@ -51,7 +74,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 		// hide user page content
 		setupUI(user);
 		if (window.location.pathname == "/user") {
-			setUpResumeList([]);
+			setUpResumeList(false, []);
 			userContent.style.display = "none";
 		}
 
@@ -69,6 +92,7 @@ if (window.location.pathname == "/form") {
 
 		db.collection("resumes")
 			.add({
+				"user-id": userID,
 				title: createForm["title"].value,
 				"full-name": createForm["full-name"].value,
 				email: createForm["email"].value,
@@ -97,9 +121,21 @@ if (window.location.pathname == "/form") {
 				"award-date": createForm["award-date"].value,
 				"award-description": createForm["award-description"].value,
 			})
-			.then(() => {
+			.then((docRef) => {
+				return db
+					.collection("users")
+					.doc(userID)
+					.update({
+						//updates the resume array with new resume id
+						resumes: firebase.firestore.FieldValue.arrayUnion(
+							docRef.id
+						),
+					});
+
 				// // clear form and send user back to user page
 				// createForm.reset();
+			})
+			.then(() => {
 				window.location.pathname = "/user";
 			})
 			.catch((err) => {
@@ -118,10 +154,18 @@ function signInWithGoogle() {
 		.auth()
 		.signInWithPopup(googleAuthProvider)
 		.then(function (data) {
-			window.location.pathname = "/user";
+			//creates new user document
+			return db.collection("users").doc(data.user.uid).set({
+				id: data.user.uid,
+				resumes: [],
+			});
+
 			// This gives you a Google Access Token.
 			// var idToken = data.credential.idToken;
 			// localStorage.setItem("firebase_idToken", idToken);
+		})
+		.then(() => {
+			window.location.pathname = "/user";
 		})
 		.catch(function (error) {
 			console.log(error);

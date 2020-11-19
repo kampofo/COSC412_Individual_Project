@@ -6,6 +6,10 @@ const loggedInLinks = document.querySelectorAll(".logged-in");
 const formContent = document.querySelector("#create-form");
 const formWarning = document.querySelector("#form-warning");
 
+var resumes = [];
+
+// console.log(resumes);
+
 const setupUI = (user) => {
 	// render particular navbar elements if user is signed in
 	if (user) {
@@ -20,24 +24,35 @@ const setupUI = (user) => {
 };
 
 // set up resume list
-const setUpResumeList = (data) => {
-	if (data.length) {
+const setUpResumeList = (user, data) => {
+	if (user) {
 		let html = "";
 
-		data.forEach((document) => {
-			console.log(document.title);
-			const li = `
-		<li>
-			<div class="resume-title">
-				${document.title}
-			</div>
-		</li>
-		`;
+		if (data.length) {
+			data.forEach((document) => {
+				console.log(document.title);
+				const li = `<div >
+					<li class="resume-title" id="${document.id}">${document.title}</li>
+				</div>`;
 
-			html += li;
-		});
-
+				html += li;
+			});
+		} else {
+			html = "<h6>No resumes</h6>";
+		}
 		resumeList.innerHTML = html;
+
+		// create click handlers for resume
+		// resumes = document.querySelectorAll(".resume-title");
+		// for (let i = 0; i < resumes.length; i++) {
+		// 	resumes[i].addEventListener("click", (e) => {
+		// 		for (let j = 0; j < data.length; j++) {
+		// 			if (data[i].id == e.target.id) {
+		// 				console.log(data[i]);
+		// 			}
+		// 		}
+		// 	});
+		// }
 	} else {
 		resumeList.innerHTML = "<h1>Please login to view user account.</h1>";
 	}
@@ -55,4 +70,8 @@ const setUpFormPage = (user) => {
 		formWarning.innerHTML = "<h1>Please login to access the form.</h1>";
 		formContent.style.display = "none";
 	}
+};
+
+const setUpResumeListeners = (event) => {
+	console.log(event.target.id);
 };

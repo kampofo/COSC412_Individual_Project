@@ -48,6 +48,10 @@ app.get("/form", function (req, res) {
 	res.render("form.ejs");
 });
 
+// app.get("/resume", function (req, res) {
+// 	res.render("resume.ejs");
+// });
+
 app.get("/*", function (req, res) {
 	res.render("404.ejs");
 });
