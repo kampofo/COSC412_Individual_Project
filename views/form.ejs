@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<%- include('partials/bootstrapCSS') -%>
 
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="form.css" />
 		<title>Form</title>
 	</head>
 	<body>
@@ -17,9 +17,16 @@
 			<h1>Resume Builder Form</h1>
 
 			<div>
+					<div><strong>All dates in 3 letter month and 4 digit year format. for example May 2020 or Aug. 2008</strong></div>
+					<div><strong>For first level division of lists use "|". for example: job1|job2|job3</strong></div>
+					<div><strong>For second level division of lists use combination of "|" "^". for example: res1^res2^res3|res1^res2^res3</strong></div>
+
+			</div>
+
+			<div>
 				<p>What is this resume for?</p>
 				<label for="title">Title</label>
-				<input type="text" name="title" id="title" />
+				<input type="text"  class="form-control"name="title" id="title" />
 			</div>
 			<div class="form-group">
 				<h3>Contact Information</h3>
@@ -27,22 +34,22 @@
 
 				<div>
 					<label for="full-name">Full Name</label>
-					<input type="text" name="full-name" id="full-name" />
+					<input type="text"  class="form-control"name="full-name" id="full-name" />
 				</div>
 
 				<div>
 					<label for="email">Email</label>
-					<input type="email" name="email" id="email" />
+					<input type="email"  class="form-control"name="email" id="email" />
 				</div>
 
 				<div>
 					<label for="telephone">Telephone</label>
-					<input type="tel" name="telephone" id="telephone" />
+					<input type="tel"  class="form-control"name="telephone" id="telephone" />
 				</div>
 
 				<div>
 					<label for="social-link">Social Media Link</label>
-					<input type="url" name="url" id="url" />
+					<input type="url"  class="form-control"name="url" id="url" />
 				</div>
 			</div>
 
@@ -52,11 +59,11 @@
 
 				<div></div>
 				<label for="school-name">School Name</label>
-				<input type="text" name="school-name" id="school-name" />
+				<input type="text"  class="form-control"name="school-name" id="school-name" />
 
 				<div>
 					<label for="school-location">Location</label>
-					<input
+					<input class="form-control"
 						type="text"
 						name="school-location"
 						id="school-location"
@@ -65,7 +72,7 @@
 
 				<div>
 					<label for="degree-type">Degree Type</label>
-					<select name="degree-type" id="degree-type">
+					<select  class="form-control"name="degree-type" id="degree-type">
 						<option value="A.A.">Associate of Arts</option>
 						<option value="A.S.">Associate of Science</option>
 						<option value="B.A.">Bachelor of Arts</option>
@@ -77,13 +84,13 @@
 
 				<div>
 					<label for="degree-name">Degree Name</label>
-					<input type="text" name="degree-name" id="degree-name" />
+					<input  class="form-control"type="text" name="degree-name" id="degree-name" />
 				</div>
 
 				<div>
 					<label for="graduation-date">Graduation Date</label>
-					<input
-						type="month"
+					<input class="form-control"
+						type="text"
 						name="graduation-date"
 						id="graduation-date"
 					/>
@@ -91,7 +98,7 @@
 
 				<div>
 					<label for="relevant-courses">Relevant Courses</label>
-					<input
+					<input class="form-control"
 						type="text"
 						name="relevant-courses"
 						id="relevant-courses"
@@ -101,12 +108,10 @@
 
 			<div class="form-group">
 				<h3>Skills</h3>
-
 				<div>
-					<label>Languages and Technologies</label>
-					<input type="text" name="languages-technologies" id="" />
+					<label>Skills</label>
+					<input  class="form-control"type="text" name="languages-technologies" id="" />
 				</div>
-
 			</div>
 
 			<div class="form-group">
@@ -114,34 +119,34 @@
 
 				<div>
 					<label for="company">Company or Organization</label>
-					<input type="text" name="company" id="" />
+					<input  class="form-control"type="text" name="company" id="" />
 				</div>
 
 				<div>
 					<label for="company-location">Location</label>
-					<input type="text" name="company-location" id="" />
+					<input  class="form-control"type="text" name="company-location" id="" />
 				</div>
 
 				<div>
 					<label for="job-title">Job Title</label>
-					<input type="text" name="job-title" id="" />
+					<input  class="form-control"type="text" name="job-title" id="" />
 				</div>
 
 				<div>
 					<label for="start-date">Start Date</label>
-					<input type="text" name="start-date" id="" />
+					<input  class="form-control"type="text" name="start-date" id="" />
 				</div>
 
 				<div>
 					<label for="end-date">End Date</label>
-					<input type="text" name="end-date" id="" />
+					<input  class="form-control"type="text" name="end-date" id="" />
 				</div>
 
 				<div>
 					<label for="job-responsibilities"
-						>Job Responsibilites</label
+						>Job Responsibilities</label
 					>
-					<input type="text" name="job-responsibilities" id="" />
+					<input  class="form-control"type="text" name="job-responsibilities" id="" />
 				</div>
 			</div>
 
@@ -150,17 +155,17 @@
 
 				<div>
 					<label for="project-title">Project Title</label>
-					<input type="text" name="project-title" id="" />
+					<input  class="form-control"type="text" name="project-title" id="" />
 				</div>
 				<div>
 					<label for="project-description">Project Description</label>
-					<input type="text" name="project-description" id="" />
+					<input  class="form-control"type="text" name="project-description" id="" />
 				</div>
 				<div>
-					<label for="project-responsibilties"
+					<label for="project-responsibilities"
 						>Project Responsibilities</label
 					>
-					<input type="text" name="project-responsibilties" id="" />
+					<input  class="form-control"type="text" name="project-responsibilities" id="" />
 				</div>
 				
 			</div>
@@ -169,23 +174,23 @@
 				<h3>Awards and Accomplishments</h3>
 				<div>
 					<label for="award-issuer">Award Issuer</label>
-					<input type="text" name="award-issuer" id="" />
+					<input  class="form-control"type="text" name="award-issuer" id="" />
 				</div>
 				<div>
 					<label for="award-title">Award Title</label>
-					<input type="text" name="award-title" id="" />
+					<input  class="form-control"type="text" name="award-title" id="" />
 				</div>
 				<div>
 					<label for="award-date">Award Date</label>
-					<input type="text" name="award-date" id="" />
+					<input  class="form-control"type="text" name="award-date" id="" />
 				</div>
 				<div>
 					<label for="award-description">Award Description</label>
-					<input type="text" name="award-description" id="" />
+					<input  class="form-control"type="text" name="award-description" id="" />
 				</div>
 			</div>
 
-			<button type="submit">Submit</button>
+			<button type="submit" class="btn btn-success">Submit</button>
 		</form>
 		<%- include('partials/firebaseHeader') -%>
 		<script src="js/index.js"></script>

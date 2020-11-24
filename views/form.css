@@ -1,0 +1,14 @@
+form{
+    text-align: center;
+}
+
+input.form-control{
+    width: 70%;
+    margin: auto
+}
+
+select.form-control{
+    width: 70%;
+    margin: auto
+}
+
