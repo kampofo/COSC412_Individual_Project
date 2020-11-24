@@ -17,9 +17,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 			var tempDoc = [];
 
 			querySnapshot.docs.forEach((doc) => {
-				// db.collection("resumes").doc(doc.id).update({
-				// 	id: doc.id,
-				// });
+			
 
 				//render resumes with certain user id
 				if (doc.data()["user-id"] == userID) {
@@ -29,12 +27,233 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 			if (window.location.pathname == "/user") {
 				userContent.style.display = "block";
-
 				setUpResumeList(user, tempDoc);
+
+				resumeContent = document.querySelector("#resume-content"); // select resume document arrea
 				resumes = document.querySelectorAll(".resume-title");
-				for (var i = 0; i < resumes.length; i++) {
-					resumes[i].addEventListener("click", (e) => {
-						console.log(tempDoc[0]);
+				var skills = [];
+				var companies = [];
+				var jobTitles = [];
+				var jobStarts = [];
+				var jobEnds = [];
+				var jobResponsibilities = [];
+
+				var projects = [];
+				var awards = [];
+
+				for (var i = 0; i < resumes.length; ++i) {
+					resumes[i].addEventListener("click", function (e) {
+						document.querySelectorAll(".resume-hide").forEach(item => {
+							item.style.display = "none";
+						})
+						for (let j = 0; j < tempDoc.length; j++) {
+							if (tempDoc[j].id == e.target.id) {
+
+								resumeContent.innerHTML = `
+								<div style="text-align:center">
+									<h3><strong>${tempDoc[j]["full-name"]}</strong></h3>
+									<p>${tempDoc[j]["email"]} | ${tempDoc[j]["telephone"]} | ${tempDoc[j]["url"]}</p>
+								</div>
+				
+								<h6><strong>EDUCATION</strong></h6>
+								<hr>
+								<p style="float:right"><strong>${tempDoc[j]["school-location"]}</strong></p>
+								<p><strong>${tempDoc[j]["school-name"]}</strong></p>
+								<!-- education section -->
+								<p style="float:right"><em>${tempDoc[j]["graduation-date"]}</em></p>
+								<p><em>${tempDoc[j]["degree-type"]} ${tempDoc[j]["degree-name"]}</em></p>
+								<ul>
+									<li>Relevant Courses: ${tempDoc[j]["relevant-courses"]}</li>
+								</ul>
+								
+								<!-- Skills section -->
+								<h6><strong>SKILLS</strong></h6>
+								<hr>
+								<ul id="skills-list">
+								</ul>
+								
+								<!-- Experience -->
+								<h6><strong>EXPERIENCE</strong></h6>
+								<hr>
+								<div id="experience-list">
+								</div>
+								
+								<!-- Projects -->
+								<h6><strong>SELECTED PROJECTS</strong></h6>
+								<hr>
+								<div id="projects-list"></div>
+								
+								<!-- Awards & Accomplishemnts-->
+								<h6><strong>AWARDS & ACCOMPLISHMENTS</strong></h6>
+								<hr>
+								<td>
+								<div id="awards-list"></div>
+								`;
+
+								// process skills
+								skills = processSkills(
+									tempDoc[j]["languages-technologies"]
+								);
+
+								skills.forEach((skill) => {
+									document.querySelector(
+										"#skills-list"
+									).innerHTML += `<li>${skill}</li>`;
+								});
+
+								// process experience
+								companies = tempDoc[j]["company"].split("|");
+								companyLocations = tempDoc[j][
+									"company-location"
+								].split("|");
+								jobTitles = tempDoc[j]["job-title"].split("|");
+								jobStarts = tempDoc[j]["start-date"].split("|");
+								jobEnds = tempDoc[j]["end-date"].split("|");
+								jobResponsibilities = tempDoc[j][
+									"job-responsibilities"
+								].split("|");
+
+								// split job responsibilities
+								for (
+									let i = 0;
+									i < jobResponsibilities.length;
+									i++
+								) {
+									jobResponsibilities[
+										i
+									] = jobResponsibilities[i].split("^");
+								}
+								
+								// populate experience section
+								for (let i = 0; i < companies.length; i++) {
+									document.querySelector("#experience-list").innerHTML += `<div>
+									<p style="float:right"><strong>${companyLocations[i]}</strong></p>
+									<p><strong>${companies[i]}</strong></p>
+									<p style="float:right"><em>${jobStarts[i]} - ${jobEnds[i]}</em></p>
+									<p><em>${jobTitles[i]}</em></p>
+									<ul class="job-responsibilities"></ul>
+									</div>`
+								}
+
+								// select all job respons. ul elements
+								var jobLists = document.querySelectorAll(
+									".job-responsibilities"
+								);
+
+								// fills in all job responsibilities
+								for (let i = 0; i < jobLists.length; i++) {
+									for (
+										let j = 0;
+										j < jobResponsibilities[i].length;
+										j++
+									) {
+										jobLists[i].innerHTML += `
+										<li>
+											${jobResponsibilities[i][j]}
+										</li>
+										`;
+									}
+								}
+
+								// process projects
+								projectTitles = tempDoc[j]["project-title"].split("|");
+								projectDescriptions = tempDoc[j]["project-description"].split("|");
+								projectResponsibilities = tempDoc[j][
+									"project-responsibilities"
+								].split("|");
+
+								// split project responsibilities
+								for (
+									let i = 0;
+									i < projectResponsibilities.length;
+									i++
+								) {
+									projectResponsibilities[
+										i
+									] = projectResponsibilities[i].split("^");
+								}
+								
+								// populate projects section
+								for (let i = 0; i < projectTitles.length; i++) {
+									document.querySelector("#projects-list").innerHTML += `<div>
+									<p><strong>${projectTitles[i]}</strong></p>
+									<p><em>${projectDescriptions[i]}</em></p>
+									<ul class="project-responsibilities"></ul>
+									</div>`
+								}
+
+								// select all project responsibilites ul elements
+								var projectResLists = document.querySelectorAll(
+									".project-responsibilities"
+								);
+
+								// fills in all job responsibilities
+								for (let i = 0; i < projectResLists.length; i++) {
+									for (
+										let j = 0;
+										j < projectResponsibilities[i].length;
+										j++
+									) {
+										projectResLists[i].innerHTML += `
+										<li>
+											${projectResponsibilities[i][j]}
+										</li>
+										`;
+									}
+								}
+
+								// process awards and accomplishments
+								awardIssuers = tempDoc[j]["award-issuer"].split("|");
+								awardTitles = tempDoc[j]["award-title"].split("|");
+								awardDates = tempDoc[j]["award-date"].split("|");
+								awardDescriptions = tempDoc[j][
+									"award-description"
+								].split("|");
+
+								// split award descriptions
+								for (
+									let i = 0;
+									i < awardDescriptions.length;
+									i++
+								) {
+									awardDescriptions[
+										i
+									] = awardDescriptions[i].split("^");
+								}
+								
+
+								// populate awards section
+								for (let i = 0; i < awardIssuers.length; i++) {
+									document.querySelector("#awards-list").innerHTML += `<div>
+									<p><strong>${awardIssuers[i]}</strong></p>
+									<p style="float:right"><em>${awardDates[i]}</em></p>
+									<p><em>${awardTitles[i]}</em></p>
+									<ul class="award-descriptions"></ul>
+									</div>`
+								}
+
+								// select all award description ul elements
+								var awardLists = document.querySelectorAll(
+									".award-descriptions"
+								);
+
+								// fills in all job responsibilities
+								for (let i = 0; i < awardLists.length; i++) {
+									for (
+										let j = 0;
+										j < awardDescriptions[i].length;
+										j++
+									) {
+										awardLists[i].innerHTML += `
+										<li>
+											${awardDescriptions[i][j]}
+										</li>
+										`;
+									}
+								}
+							}
+						}
+					
 					});
 				}
 			}
@@ -43,31 +262,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 				setUpFormPage(user);
 			}
 
-			// if (window.location.pathname == "/resume") {
-			// 	console.log(resumes);
-			// }
 			setupUI(user);
 		});
-
-		// db.collection("resumes")
-		// 	.get()
-		// 	.then((querySnapshot) => {
-		// 		const tempDoc = [];
-		// 		querySnapshot.forEach((doc) => {
-		// 			tempDoc.push({ id: doc.id, ...doc.data() });
-		// 		});
-
-		// 		if (window.location.pathname == "/user") {
-		// 			userContent.style.display = "block";
-
-		// 			setUpResumeList(tempDoc);
-		// 		}
-
-		// 		if (window.location.pathname == "/form") {
-		// 			setUpFormPage(user);
-		// 		}
-		// 		setupUI(user);
-		// 	});
 	} else {
 		// on sign out
 		console.log("user logged out!");
@@ -83,6 +279,12 @@ firebase.auth().onAuthStateChanged(function (user) {
 		}
 	}
 });
+
+function processSkills(skills) {
+	skills = skills.split("|");
+
+	return skills;
+}
 
 // creating new resume
 if (window.location.pathname == "/form") {
@@ -160,9 +362,6 @@ function signInWithGoogle() {
 				resumes: [],
 			});
 
-			// This gives you a Google Access Token.
-			// var idToken = data.credential.idToken;
-			// localStorage.setItem("firebase_idToken", idToken);
 		})
 		.then(() => {
 			window.location.pathname = "/user";

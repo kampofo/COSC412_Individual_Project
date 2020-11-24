@@ -13,10 +13,12 @@ var resumes = [];
 const setupUI = (user) => {
 	// render particular navbar elements if user is signed in
 	if (user) {
+
 		// toggle UI elements
 		loggedInLinks.forEach((item) => (item.style.display = "block"));
 		loggedOutLinks.forEach((item) => (item.style.display = "none"));
 	} else {
+		
 		// toggle UI elements
 		loggedInLinks.forEach((item) => (item.style.display = "none"));
 		loggedOutLinks.forEach((item) => (item.style.display = "block"));
@@ -42,17 +44,6 @@ const setUpResumeList = (user, data) => {
 		}
 		resumeList.innerHTML = html;
 
-		// create click handlers for resume
-		// resumes = document.querySelectorAll(".resume-title");
-		// for (let i = 0; i < resumes.length; i++) {
-		// 	resumes[i].addEventListener("click", (e) => {
-		// 		for (let j = 0; j < data.length; j++) {
-		// 			if (data[i].id == e.target.id) {
-		// 				console.log(data[i]);
-		// 			}
-		// 		}
-		// 	});
-		// }
 	} else {
 		resumeList.innerHTML = "<h1>Please login to view user account.</h1>";
 	}

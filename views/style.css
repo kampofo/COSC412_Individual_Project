@@ -1,0 +1,13 @@
+html{
+    font-size: 17px;
+}
+
+#resume-content hr {
+    margin-top: 0;
+    margin-bottom: .5rem;
+    border-top: 2px solid black;
+}
+
+#resume-content p {
+    margin-bottom: 0;
+}
